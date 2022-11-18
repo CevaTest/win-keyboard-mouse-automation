@@ -11,4 +11,9 @@ The app will move your mouse around randomly on the screen, this will prevent yo
 
 Since i did a rushed implementation to do the basics
 
-build the code from source
+- build the code from source
+- run the exe SimExamples.exe
+- it will open up a pwf gui form with a few buttons
+- click move cursor randomly
+
+thats it, your computer wont sleep anymore or timeout from chats
