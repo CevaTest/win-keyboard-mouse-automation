@@ -66,6 +66,68 @@ namespace SimExamples
         }
 
 
+        private void MoveCursorToCornerButton_ClickExperiment(object sender, RoutedEventArgs e)
+        {
+            
+            
+            //var t = DateTime.Now.Ticks.ToString().Reverse().Take(10).Select(x3 => x3.ToString());
+            var t = DateTime.Now.Ticks.ToString();
+
+            
+            //bool isPrimary = primaryScreen.Primary;
+            //var deviceName = primaryScreen.DeviceName;
+
+            // make a real random but who cares
+            Screen primaryScreen = Screen.PrimaryScreen;
+            
+            var primaryScreenWorkingArea = primaryScreen.WorkingArea;
+            var height = primaryScreenWorkingArea.Height;
+            var width = primaryScreenWorkingArea.Width;
+            var bottom = primaryScreenWorkingArea.Bottom;
+            var isEmpty = primaryScreenWorkingArea.IsEmpty;
+            var left = primaryScreenWorkingArea.Left;
+            var right = primaryScreenWorkingArea.Right;
+            System.Drawing.Point location = primaryScreenWorkingArea.Location;
+
+            Random randomNumberGenerator = new Random();
+            
+            var startY = (height) / 2 ;
+            var startX = (width) / 2 ;
+
+
+            var i = 1;
+            while (true)
+            {
+                SimMouse.Act(SimMouse.Action.MoveOnly, startX, startY);
+                
+                var curloc = location;
+                //int nextYAxisMouseLocationPoint = randomNumberGenerator.Next(primaryScreenWorkingArea.Height, primaryScreenWorkingArea.Bottom);
+                //int nextXAxisMouseLocationPoint = randomNumberGenerator.Next(left, right);
+                var minValue = startY + -2;
+                int deviation = 5;
+                for (int j = 0; j < 10000; j++)
+                {
+                    int x = 1;
+                    int y = 1;
+                    
+                    int nextXAxisMouseLocationPoint = randomNumberGenerator.Next(startY - deviation, startY + deviation);
+                    int nextYAxisMouseLocationPoint = randomNumberGenerator.Next(startX -deviation , startX + deviation);
+                    SimMouse.Act(SimMouse.Action.MoveOnly, nextXAxisMouseLocationPoint, nextYAxisMouseLocationPoint);
+                    Thread.Sleep(1000);
+                }
+                
+                //SimMouse.Act(SimMouse.Action.MoveOnly, nextXAxisMouseLocationPoint, nextYAxisMouseLocationPoint);
+                Thread.Sleep(3000);
+                Debug.WriteLine($"Loopcount: {i} ");
+                //Debug.WriteLine($"x:{nextXAxisMouseLocationPoint} y:{nextYAxisMouseLocationPoint}");
+            }
+
+
+
+            //SimMouse.Act(SimMouse.Action.MoveOnly, 0, 0);
+        }
+
+
         //private void MoveCursorToCornerButton_Click(object sender, RoutedEventArgs e)
         //{
         //    SimMouse.Act(SimMouse.Action.MoveOnly, 0, 0);
